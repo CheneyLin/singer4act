@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <title>我是歌手·互动</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true"/>
+
+    <link rel="stylesheet" href="run.css">
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+
+<body>
+    <div class="page page-loading">
+        <img src="assets/images/loading.jpg">
+    </div>
+    <div class="page page-app">
+        <div class="nav app-nav">
+            <ul>
+                <li class="ad"><img src="assets/images/img_adlogo.png"></li>
+                <li class="title">我是歌手：竞猜本轮谁是第一名？</li>
+                <li class="quit"><img src="assets/images/btn_quit.png"></li>
+            </ul>
+        </div>
+        <div class="app-main">
+            <div class="main-menu">
+                <ul class="clearfix"></ul>
+            </div>
+            <div class="main-content">
+                <ul class="clearfix"></ul>
+                <div class="main-content-share"><img src="assets/images/btn_share.png"></div>
+            </div>
+        </div>
+    </div>
+    <div class="page page-vote">
+        <div class="nav vote-nav">
+                <img src="assets/images/btn_back.png">
+        </div>
+        <div class="vote-main">
+
+        </div>
+    </div>
+    <div class="page page-wx">
+        <div class="wx-top">
+            <img src="assets/images/wx_top.jpg">
+        </div>
+    </div>
+
+
+
+    <div class="mg-toast"><p class="android">ttt</p></div>
+
+    <div class="mg-share"><img src="http://i5.hunantv.com/s1/2015/qmjs/images/share-tips.png" alt=""></div>
+
+
+    <div style="display: none;"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257490081'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1257490081' type='text/javascript'%3E%3C/script%3E"));</script></div>
+
+    <script src="http://i5.hunantv.com/s1/2015/h5lib/js/jquery.min.js"></script>
+    <script src="http://i5.hunantv.com/s1/2015/h5lib/js/imgotv-sdk.js"></script>
+    <script src="run-min.js"></script>
+
+    <script>
+	var ShareData = {
+        "type": "link",
+        "imgUrl": "http://i5.hunantv.com/s1/2014/m/u/96/20161201022286836.jpg",
+        "link": (location.href.split('#')[0]).replace(/h=1/g,'h=0'),
+        "title": "我是歌手·互动",
+        "desc": "我是歌手·互动",
+        "title2": "我是歌手·互动"
+    };
+    Utils.wxShare();
+    </script>
+</body>
+</html>
