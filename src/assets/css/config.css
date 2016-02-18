@@ -4,3 +4,41 @@
 .page-loading{
     background-color: #950062;
 }
+
+.page-loading img{
+    -webkit-animation-duration:0.75s;animation-duration:0.75s;
+    -webkit-animation-fill-mode:both;
+    animation-fill-mode:both;
+    -webkit-animation-name: fadeIn;
+	animation-name: fadeIn;
+}
+.page-loading div{
+    -webkit-animation-duration:2s;animation-duration:2s;
+    -webkit-animation-fill-mode:both;animation-fill-mode:both;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+    -webkit-animation-name: flash;
+	animation-name: flash;
+}
+
+@-webkit-keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
+@-webkit-keyframes flash {
+	0%,100%,50% {
+		opacity: 1
+	}
+
+	25%,75% {
+		opacity: 0.5
+	}
+}
+
+@keyframes flash {
+	0%,100%,50% {
+		opacity: 1
+	}
+
+	25%,75% {
+		opacity: 0.5
+	}
+}

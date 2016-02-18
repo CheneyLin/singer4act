@@ -6,13 +6,16 @@ var uglify = require('gulp-uglify');
 var cssnano = require('gulp-cssnano');
 var jshint = require('gulp-jshint');
 var imagemin = require('gulp-imagemin');
+var replace = require('gulp-replace');
 
 var spawn = require('child_process').spawn;
 
-var htmlFiles = ['./src/apprun.html'];
+var assetsUrl='http://i5.hunantv.com/s1/2014/m/u/108/';
+var htmlFiles = ['./src/apphome.html'];
 var imgFiles = './src/assets/images/*.*';
 var scriptLibFiles = ['./src/assets/js/lib/jquery.min.js','./src/assets/js/lib/imgotv-sdk.js'];
-var scriptFiles = ['./src/assets/js/comm/underscore.min.1.8.3.js',
+var scriptFiles = ['./src/assets/js/lib/tinysort.js',
+    './src/assets/js/comm/underscore.min.1.8.3.js',
     './src/assets/js/comm/fastclick.js',
     './src/assets/js/comm/ua.js',
     './src/assets/js/comm/utils.js',
@@ -36,15 +39,18 @@ gulp.task('default', function(){
     gulp.src(scriptFiles)
         .pipe(concat('run.js'))
         .pipe(minify())
+        .pipe(replace('assets/', assetsUrl))
         //.pipe(uglify())
-        .pipe( gulp.dest('./dist/'));
+        .pipe( gulp.dest('./dist/assets/js/'));
 
     gulp.src(cssFiles)
         .pipe(concat('run.css'))
+        .pipe(replace('assets/', assetsUrl))
         .pipe(cssnano())
-        .pipe(gulp.dest('./dist/'));
+        .pipe(gulp.dest('./dist/assets/css/'));
 
     gulp.src(htmlFiles)
+        .pipe(replace('assets/', assetsUrl))
         .pipe(gulp.dest('./dist/'));
 
     gulp.src(imgFiles)

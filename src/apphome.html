@@ -13,15 +13,28 @@
     <meta name="x5-fullscreen" content="true">
     <meta name="360-fullscreen" content="true"/>
 
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="stylesheet" href="assets/css/page.css">
-    <link rel="stylesheet" href="assets/css/config.css">
+    <link rel="stylesheet" href="assets/css/run.css">
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+    var CustomData = {
+        "titleApp":"我是歌手：竞猜本轮谁是第一名？",
+        "titleLastPage":"竞猜本轮谁是第一名？",
+    };
+	var ShareData = {
+        "type": "link",
+        "imgUrl": "http://i5.hunantv.com/s1/2014/m/u/96/20161201022286836.jpg",
+        "link": (location.href.split('#')[0]).replace(/h=1/g,'h=0'),
+        "title": "我是歌手·互动",
+        "desc": "我是歌手·互动",
+        "title2": "我是歌手·互动"
+    };
+    </script>
 </head>
 
 <body>
     <div class="page page-loading">
         <img src="assets/images/loading.jpg">
+        <div>韩束巨补水 邀您进入...</div>
     </div>
     <div class="page page-app">
         <div class="nav app-nav">
@@ -55,8 +68,6 @@
         </div>
     </div>
 
-
-
     <div class="mg-toast"><p class="android">ttt</p></div>
 
     <div class="mg-share"><img src="http://i5.hunantv.com/s1/2015/qmjs/images/share-tips.png" alt=""></div>
@@ -64,29 +75,11 @@
 
     <div style="display: none;"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257490081'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1257490081' type='text/javascript'%3E%3C/script%3E"));</script></div>
 
-    <script src2="http://i5.hunantv.com/s1/2015/h5lib/js/zepto.min.js"></script>
-
     <script src="http://i5.hunantv.com/s1/2015/h5lib/js/jquery.min.js"></script>
-
     <script src="http://i5.hunantv.com/s1/2015/h5lib/js/imgotv-sdk.js"></script>
-
-    <script src="assets/js/comm/underscore.min.1.8.3.js"></script>
-    <script src="assets/js/comm/fastclick.js"></script>
-    <script src="assets/js/comm/ua.js"></script>
-    <script src="assets/js/comm/utils.js"></script>
-
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/run-min.js"></script>
 
     <script>
-	var ShareData = {
-        "type": "link",
-        "imgUrl": "http://i5.hunantv.com/s1/2014/m/u/96/20161201022286836.jpg",
-        "link": (location.href.split('#')[0]).replace(/h=1/g,'h=0'),
-        "title": "我是歌手·互动",
-        "desc": "我是歌手·互动",
-        "title2": "我是歌手·互动"
-    };
     Utils.wxShare();
     </script>
 </body>
