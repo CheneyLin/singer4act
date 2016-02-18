@@ -400,11 +400,26 @@
 
 
 
-.page-vote .vote-main img.avatar{
-        border-radius: 100%;
+.page-vote .vote-main .avatarbox{
         width:50%;
         height:auto;
-        margin: 2px auto;
+        margin: 5% auto;
+}
+
+
+.page-vote .vote-main .avatarline{
+    position: relative;
+    width:100%;
+}
+
+
+
+.page-vote .vote-main img.avatar{
+    position: relative;
+    border-radius: 100%;
+    width: 90%;
+    height: auto;
+    margin: 10px auto;
 }
 
 

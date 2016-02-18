@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     content = '<li><h1>'+CustomData.titleLastPage+'</h1><div class="content-list1 clearfix" style="height:'+($('.main-content').height()-80)+'px;"><ul>';
 
                     for(var j=0;j<data.length;j++){
-                        content+='<li class="content-voteli clearfix" data-sortvalue="'+data[j].like_star_number+'" data-index="'+i+'" data-index2="'+j+'">';
+                        content+='<li class="content-voteli clearfix" data-sortvalue="'+data[j].like_star_number+'" data-index="'+i+'" data-index2="'+j+'" data-max="'+maxValue+'">';
                         content+='<img class="avatar" src="'+data[j].pc_avatar_key+'">';
                         content+='<h1>'+data[j].name+'</h1>';
                         //content+='<h2><span id="check_'+data.term_id+'"><img class="icon" src="assets/images/icon_uncheck.png"></span>'+data[j].like_star_number+'</h2>';
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     content = '<li class="content-term content-term-'+i+'"><h2 class="active" data-index="'+i+'">网友人气榜</h2><h3 data-index="'+i+'">本轮竞演排名</h3>';
                     content+='<div class="content-list1 clearfix" style="height:'+($('.main-content').height()-80)+'px;"><ul>';
                     for(var j=0;j<data.length;j++){
-                        content+='<li class="content-voteli clearfix" data-sortvalue="'+data[j].like_music_number+'" data-index="'+i+'" data-index2="'+j+'">';
+                        content+='<li class="content-voteli clearfix" data-sortvalue="'+data[j].like_music_number+'" data-index="'+i+'" data-index2="'+j+'" data-max="'+maxValue+'">';
                         content+='<img class="avatar" src="'+data[j].pc_avatar_key+'">';
                         content+='<h1>'+data[j].name+'<img class="icon"  src="assets/images/icon_song.png">'+data[j].music+'</h1>';
                         content+='<h2><span class="content-check" id="check_'+data[j].term_id+'"></span>'+data[j].like_music_number+'</h2>';
@@ -213,12 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     content+='</ul></div>';
                     content+='<div class="content-list2 clearfix" style="height:'+($('.main-content').height()-80)+'px;display:none;"><ul>';
                     for(var j=0;j<data.length;j++){
-                        if(j==4&&data.length==7){
-                            content+='<li class="-cancel-content-voteli clearfix cols3offset" data-rank="'+data[j].rank+'">';
-                        }
-                        else {
-                            content+='<li class="-cancel-content-voteli clearfix" data-rank="'+data[j].rank+'">';
-                        }
+                        content+='<li class="-cancel-content-voteli clearfix" data-rank="'+data[j].rank+'">';
                         content+='<div data-rank="'+data[j].rank+'"><img class="avatar" src="'+data[j].pc_avatar_key+'"></div>';
                         content+='<h1>'+data[j].name+'</h1>';
                         //content+='<h2>'+data[j].like_star_number+'</h2>';
@@ -233,6 +228,9 @@ document.addEventListener('DOMContentLoaded', function() {
 				//tinysort.defaults.order = 'asc';
 				tinysort.defaults.attr = 'data-rank';
 				tinysort('.main-content>ul li:nth-child('+(i+1)+') .content-list2 ul li');
+                if(data.length==7){
+                    $('.main-content>ul li:nth-child('+(i+1)+') .content-list2 ul li:nth-child(5)').addClass('cols3offset');
+                }
 
                 var lastCheck=Utils.getCookie(COOKIE_TAG+data[0].id);
                 $('#check_'+lastCheck).removeClass('content-check').addClass('content-check-active');
@@ -260,9 +258,10 @@ document.addEventListener('DOMContentLoaded', function() {
             $('.main-content li').on('click', '.content-voteli', function () {
                 var i = $(this).data('index');
                 var j = $(this).data('index2');
+                var m = $(this).data('max');
                 var data = TERMLIST[i][j];
                 //console.log(data);
-                _this.showVotePage(data);
+                _this.showVotePage(data,m);
             });
             //歌曲投票和竞演排行切换
             $('.content-term').on('click', 'h2', function () {
@@ -284,18 +283,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
         },
         // 投票pop
-        showVotePage: function (data) {
+        showVotePage: function (data,maxValue) {
             var _this = this;
+
+            var goCanvasAdd=function(){
+                var canvasWidth=$('.avatarline').width();
+                $('.avatarbox').height($('.avatarbox').width());
+                $('.avatarline').height($('.avatarline').width());
+                $('.avatarbox .avatar').width(canvasWidth-20).css('top','-'+$('.avatarline').width()+'px');
+                $('.avatarline').html('<canvas id="avatarCanvas" width="'+$('.avatarline').width()+'px" height="'+$('.avatarline').width()+'px"></canvas>');
+            };
+            var goCanvasClear=function(){
+                var canvas = document.getElementById("avatarCanvas");
+                var canvasWidth=$('.avatarline').width();
+                //获取对应的CanvasRenderingContext2D对象(画笔)
+                var ctx = canvas.getContext("2d");
+                ctx.clearRect(0,0,canvasWidth,canvasWidth);
+                };
+            var goCanvasDraw=function(color,padding,v,max){
+                var canvas = document.getElementById("avatarCanvas");
+                var canvasWidth=$('.avatarline').width();
+                //获取对应的CanvasRenderingContext2D对象(画笔)
+                var ctx = canvas.getContext("2d");
+
+                //开始一个新的绘制路径
+                ctx.beginPath();
+                //设置弧线的颜色为蓝色
+                ctx.strokeStyle = color;
+                var circle = {
+                    x : canvasWidth/2,    //圆心的x轴坐标值
+                    y : canvasWidth/2,    //圆心的y轴坐标值
+                    r : (canvasWidth-padding)/2      //圆的半径
+                };
+                //沿着坐标点(100,100)为圆心、半径为50px的圆的顺时针方向绘制弧线
+                if(v==-1)
+                ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI*2, false);
+                else
+                ctx.arc(circle.x, circle.y, circle.r, Math.PI*1.5, 0+(Math.PI*(v/max)), false);
+                //按照指定的路径绘制弧线
+                ctx.stroke();
+            };
+            var timer = function(code,speed,count){
+                var num = 0;
+                var myTimer = setInterval(function(){
+                    code();
+                    num++;
+                    if(count&&num>=count)
+                        clearInterval(myTimer);
+                },speed);
+            };
 
             if(data.is_end==0){
 
                 var content='';
                 content+='<h1>'+data.name+'</h1>';
+                content+='<div class="avatarbox clearfix">';
+                content+='<div class="avatarline">';
+                content+='</div>';
                 content+='<img class="avatar" src="'+data.pc_avatar_key+'">';
+                content+='</div>';
                 content+='<h2><img class="icon"  src="assets/images/icon_uncheck.png"><span>'+data.like_star_number+'</span></h2>';
                 content+='<h3><div><img class="btnvote1" src="assets/images/btn_vote1.png"></div><div><img class="btnvote2" src="assets/images/btn_vote2.png"></div></h3>';
+
+
                 $('.vote-main').html(content);
                 $('.page-vote').show();
+                goCanvasAdd();
+                //goCanvasDraw('#dddddd',12,-1,maxValue);
+                //goCanvasDraw('#ff6666',12,data.like_star_number,maxValue);
 
                 // 投票 6a30ccf62c399d605151dc022796721e X435J77VHPUVXVYXDB8B
                 $('.btnvote1').on('click', '', function () {
@@ -350,10 +405,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 var content='';
                 content+='<h1>'+data.name+'</h1>';
                 content+='<h2><img class="icon"  src="assets/images/icon_song.png">'+data.music+'</h2>';
+                content+='<div class="avatarbox clearfix">';
+                content+='<div class="avatarline">';
+                content+='</div>';
                 content+='<img class="avatar" src="'+data.pc_avatar_key+'">';
+                content+='</div>';
                 content+='<h4><div><img class="btnvote1" src="assets/images/btn_vote1.png"><span>'+data.like_music_number+'</span></div><div><img class="btnvote3" src="assets/images/btn_vote3.png"><span>'+data.unlike_music_number+'</span></div></h4>';
                 $('.vote-main').html(content);
                 $('.page-vote').show();
+
+                goCanvasAdd();
+                goCanvasDraw('#dddddd',4,-1,maxValue);
+                goCanvasDraw('#dddddd',12,-1,maxValue);
+                var a = 0, b = 0;
+                timer(function(){goCanvasClear();goCanvasDraw('#eeeeee',4,-1,maxValue);goCanvasDraw('#eeeeee',12,-1,maxValue);goCanvasDraw('#f55252',12,a,maxValue);a+=(data.like_music_number/10);goCanvasDraw('#35dcd6',4,b,maxValue);b+=(data.unlike_music_number/10)},100,10);
+                //goCanvasDraw('#f55252',12,data.like_music_number,maxValue);
+                //goCanvasDraw('#35dcd6',4,data.unlike_music_number,maxValue);
 
                 // 投票 6a30ccf62c399d605151dc022796721e X435J77VHPUVXVYXDB8B
                 $('.btnvote1').on('click', '', function () {
