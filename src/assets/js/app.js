@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         else {
                             content+='<li class="-cancel-content-voteli clearfix" data-rank="'+data[j].rank+'">';
                         }
-                        content+='<img class="avatar" src="'+data[j].pc_avatar_key+'">';
+                        content+='<div data-rank="'+data[j].rank+'"><img class="avatar" src="'+data[j].pc_avatar_key+'"></div>';
                         content+='<h1>'+data[j].name+'</h1>';
                         //content+='<h2>'+data[j].like_star_number+'</h2>';
                         //content+='<h3><div class="barbg"></div><div class="barshow" style="width:'+(Math.floor(parseFloat(data[j].like_star_number)/maxValue*0.8))+'%"></div></h3>';
@@ -410,9 +410,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             if(respData.code==400){
                                 _this.goAlert(PROMPT_REPEATE);
                             }else {
-                                $('.vote-main h4 div:last-child span').html(parseFloat($('.vote-main h4 div:last-child span').html())+1);
-                                Utils.setCookie(COOKIE_TAG+data.id,data.term_id,1/24);
-                                $('#check_'+data.term_id).removeClass('content-check').addClass('content-check-active');
+                                //$('.vote-main h4 div:last-child span').html(parseFloat($('.vote-main h4 div:last-child span').html())+1);
+                                Utils.setCookie(COOKIE_TAG+data.id,data.term_id+100000,1/24);
+                                //$('#check_'+data.term_id).removeClass('content-check').addClass('content-check-active');
                                 _this.goAlert(PROMPT_SUCCESS);
                             }
                         });
@@ -420,9 +420,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     var goVoteGuest = function(){
                         var lastCheck=Utils.getCookie(COOKIE_TAG+data.id);
                         if(lastCheck==null){
-                            $('.vote-main h4 div:last-child span').html(parseFloat($('.vote-main h4 div:last-child span').html())+1);
-                            Utils.setCookie(COOKIE_TAG+data.id,data.term_id,1/24);
-                            $('#check_'+data.term_id).removeClass('content-check').addClass('content-check-active');
+                            //$('.vote-main h4 div:last-child span').html(parseFloat($('.vote-main h4 div:last-child span').html())+1);
+                            Utils.setCookie(COOKIE_TAG+data.id,data.term_id+100000,1/24);
+                            //$('#check_'+data.term_id).removeClass('content-check').addClass('content-check-active');
                             _this.goAlert(PROMPT_SUCCESS);
                         }else {
                             _this.goAlert(PROMPT_REPEATE);

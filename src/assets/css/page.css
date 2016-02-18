@@ -265,14 +265,13 @@
 .page-app .app-main .main-content .content-list2 ul li{
     float:left;
     width:25%;
-    height:90px;
+    margin-top: 2%;
     text-align: center;
 }
 .page-app .app-main .main-content .content-list2 ul li:nth-child(1){
     float:left;
     width:33%;
-    height:110px;
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 33%;
     margin-right: 33%;
     text-align: center;
@@ -283,11 +282,16 @@
 .page-app .app-main .main-content .content-list2 ul li.cols3offset{
     margin-left: 12.5%;
 }
+.page-app .app-main .main-content .content-list2 ul li div{
+    display: block;
+    position: relative;
+}
+
 .page-app .app-main .main-content .content-list2 ul li img{
     border-radius: 100%;
     width:70%;
     height:auto;
-    margin:0 15% 0 15%;
+    margin:2% 15% 2% 15%;
     clear: both;
 }
 
@@ -299,28 +303,27 @@
 }
 
 
-.page-app .app-main .main-content .content-list2 ul li:after{
-    position: relative;
+.page-app .app-main .main-content .content-list2 ul li div:after{
+    position: absolute;;
     width: 20px;
-    height: 20px;
+    height: 16px;
     background: #aaa;
     color:#fff;
     border-radius: 10px;
-    top: -92%;
-    left: 74%;
+    top: 0;
+    right: 0;
     font-size: 0.75rem;
-    line-height: 20px;
+    line-height: 16px;
     content: attr(data-rank);
     border: 1px solid #fff;
+    margin:2%;
     }
 
-.page-app .app-main .main-content .content-list2 ul li:nth-child(1):after{
+.page-app .app-main .main-content .content-list2 ul li:nth-child(1) div:after{
     width: 25px;
     height: 20px;
-    top: -92%;
-    left: 74%;
+    line-height: 20px;
     background: #ff6000;
-    content: attr(data-rank);
     }
 
 
