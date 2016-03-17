@@ -1187,7 +1187,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var MG = {
         init: function () {
-
+            if (UA.isAndroid){
+                var AndroidReload=Utils.getCookie('AndroidReload');
+                if(AndroidReload==null){
+                    Utils.setCookie('AndroidReload','true',1/24/60);
+                    window.location.reload();
+                }
+            }
             if ( UA.isImgotv && !Utils.checkAppVersion() ) {
                 window.location.href = 'http://www.hunantv.com/v/m/v/2015/mupdate/?from=wsgstg';
                 return;
@@ -1317,8 +1323,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             $('.app-nav .title').html(CustomData.titleApp);
 
-            $('.page-app').css('margin-top',PAGE_TOP_OFFSET+'px');
-            $('.page-vote').css('margin-top',PAGE_TOP_OFFSET+'px');
+            $('.page-app').height(PAGE_HEIGHT).css('margin-top',PAGE_TOP_OFFSET+'px');
+            $('.page-vote').height(PAGE_HEIGHT).css('margin-top',PAGE_TOP_OFFSET+'px');
+
             $('.main-menu').height(PAGE_HEIGHT-$('.nav').height());
             for(var i=0;i<TERMLIST.length;i++){
                 $('.main-menu ul').append('<li><h1>'+(i+1)+'</h1><h2>期</h2></li>')
@@ -1506,6 +1513,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 content+='</div>';
                 content+='<h2><img class="icon"  src="http://i5.hunantv.com/s1/2014/m/u/108/images/icon_uncheck.png"><span>'+data.like_star_number+'</span></h2>';
                 content+='<h3><div><img class="btnvote1" src="http://i5.hunantv.com/s1/2014/m/u/108/images/btn_vote1.png"></div><div><img class="btnvote2" src="http://i5.hunantv.com/s1/2014/m/u/108/images/btn_vote2.png"></div></h3>';
+                content+='<div class="vote-main-ok clearfix hide">';
+                content+='<img src="http://i5.hunantv.com/s1/2014/m/u/108/images/img_ad1.jpg">';
+                content+='<div class="txt">';
+                content+='感谢您的参与！竞猜成功将有机会获得<br>韩束墨菊特润咕噜水新品一份！';
+                content+='</div>';
+                content+='<div class="btn">';
+                content+='返回';
+                content+='</div>';
+                content+='</div>';
+
 
 
                 $('.vote-main').html(content);
@@ -1528,7 +1545,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 $('.vote-main h2 span').html(parseFloat($('.vote-main h2 span').html())+1);
                                 Utils.setCookie(COOKIE_TAG+data.id,data.term_id,1/24);
                                 $('#check_'+data.term_id).removeClass('content-check').addClass('content-check-active');
-                                _this.goAlert(PROMPT_SUCCESS);
+                                //_this.goAlert(PROMPT_SUCCESS);
+                                $('.vote-main-ok').removeClass('hide');
+
                             }
                         });
                     };
@@ -1538,7 +1557,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             $('.vote-main h2 span').html(parseFloat($('.vote-main h2 span').html())+1);
                             Utils.setCookie(COOKIE_TAG+data.id,data.term_id,1/24);
                             $('#check_'+data.term_id).removeClass('content-check').addClass('content-check-active');
-                            _this.goAlert(PROMPT_SUCCESS);
+                            //_this.goAlert(PROMPT_SUCCESS);
+                            $('.vote-main-ok').removeClass('hide');
+
+
                         }else {
                             _this.goAlert(PROMPT_REPEATE);
                         }
@@ -1558,6 +1580,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 // 取消
                 $('.btnvote2').on('click', '', function () {
+                    //$(this).addClass('active');
+                    //setTimeout("$('.page-vote').hide();",200);
+                    $('.page-vote').hide();
+                });
+                // 取消
+                $('.btn').on('click', '', function () {
                     //$(this).addClass('active');
                     //setTimeout("$('.page-vote').hide();",200);
                     $('.page-vote').hide();
@@ -1609,7 +1637,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             $('.vote-main h4 div:first-child span').html(parseFloat($('.vote-main h4 div:first-child span').html())+1);
                             Utils.setCookie(COOKIE_TAG+data.id,data.term_id,1/24);
                             $('#check_'+data.term_id).removeClass('content-check').addClass('content-check-active');
+
                             _this.goAlert(PROMPT_SUCCESS);
+
                         }else {
                             _this.goAlert(PROMPT_REPEATE);
                         }
@@ -1652,6 +1682,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             //$('.vote-main h4 div:last-child span').html(parseFloat($('.vote-main h4 div:last-child span').html())+1);
                             Utils.setCookie(COOKIE_TAG+data.id,data.term_id+100000,1/24);
                             //$('#check_'+data.term_id).removeClass('content-check').addClass('content-check-active');
+
                             _this.goAlert(PROMPT_SUCCESS);
                         }else {
                             _this.goAlert(PROMPT_REPEATE);

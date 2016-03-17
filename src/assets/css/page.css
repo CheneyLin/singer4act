@@ -96,15 +96,17 @@
 
 .page-app .app-main .main-menu ul li h1{
     float:left;
-    font-size: 32px;
-    margin:20px 0 0 10px;
+    font-size: 22px;
+    margin:20px 0 0 8px;
+    color:#666;
 
 }
 
 .page-app .app-main .main-menu ul li h2{
     float:left;
     margin:34px 0 0 0;
-    font-size:12px;
+    font-size:10px;
+    color:#666;
 }
 
 
@@ -123,26 +125,29 @@
 
 .page-app .app-main .main-content>ul>li>h1{
     height:25px;
-    margin:5px 0 5px 10px;
+    margin:10px 0 10px 10px;
     line-height: 25px;
     color:#f06000;
+    font-size:0.93rem;
 }
 .page-app .app-main .main-content>ul>li>h2{
     float: left;
-    margin:5px 0 5px 0;
+    margin:10px 0 10px 0;
     height:25px;
     width:40%;
     line-height: 25px;
     text-align: center;
+    font-size:0.93rem;
 }
 .page-app .app-main .main-content>ul>li>h3{
     float: left;
-    margin:5px 0 5px 0;
+    margin:10px 0 10px 0;
     border-left:1px solid #CCC;
     height:25px;
     width:40%;
     line-height: 25px;
     text-align: center;
+    font-size:0.93rem;
 }
 .page-app .app-main .main-content>ul>li>h2.active, .page-app .app-main .main-content>ul>li>h3.active {
     color:#f06000;
@@ -194,7 +199,7 @@
     border-radius: 100%;
     width:18%;
     height:auto;
-    margin: 4%;
+    margin: 3% 4% 3% 4%;
 }
 
 .page-app .app-main .main-content .content-list1 ul li img.icon{
@@ -277,10 +282,10 @@
     text-align: center;
 }
 .page-app .app-main .main-content .content-list2 ul li:nth-child(2){
-    margin-left: 12.5%;
+    margin-left: 13%;
 }
 .page-app .app-main .main-content .content-list2 ul li.cols3offset{
-    margin-left: 12.5%;
+    margin-left: 13%;
 }
 .page-app .app-main .main-content .content-list2 ul li div{
     display: block;
@@ -307,8 +312,8 @@
     position: absolute;;
     width: 20px;
     height: 16px;
-    background: #aaa;
-    color:#fff;
+    background: #eee;
+    color:#666;
     border-radius: 10px;
     top: 0;
     right: 0;
@@ -324,11 +329,13 @@
     height: 20px;
     line-height: 20px;
     background: #ff6000;
+    color:#fff;
     }
 
 
 .page-vote {
     z-index:2;
+    overflow: hidden;
     display: none;
 }
 
@@ -340,6 +347,7 @@
 
 .page-vote .vote-main {
   text-align: center;
+  position: relative;
 }
 
 
@@ -461,6 +469,57 @@
     opacity: 1.0;
 }
 
+.page-vote .vote-main  .vote-main-ok{
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color: #FFF;
+
+    -webkit-animation-name:  animation-up;
+    -webkit-animation-duration: 0.7s;
+    -webkit-animation-iteration-count:1;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-fill-mode: both;
+}
+
+.page-vote .vote-main  .vote-main-ok img{
+    margin:2px auto;
+    width:80%;
+}
+
+.page-vote .vote-main  .vote-main-ok .txt{
+    color:#666;
+    font-size: 0.85rem;
+    line-height: 1.15rem;
+    margin:10px auto;
+    width:90%;
+}
+
+.page-vote .vote-main  .vote-main-ok .btn{
+    margin:10px auto;
+    font-size: 0.85rem;
+    width:35%;
+    height:40px;
+    line-height: 40px;
+    color:#f06000;
+    border-radius: 20px;
+    border:1px solid #f06000;
+    background-color: #ffffff;
+
+}
+
+
+@-webkit-keyframes animation-up {
+    0% {
+        -webkit-transform: translateY(100%);
+    }
+    100% {
+        -webkit-transform: translateY(0);
+    }
+}
 .page-wx .wx-top{
 
 }
